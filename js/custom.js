@@ -1,6 +1,7 @@
 const form = document.getElementById('myForm');
 const searchInput = document.getElementById('searchInput');
 const resultDiv = document.getElementById('result');
+const loadingPopup = document.getElementById('loadingPopup');
 
 const courseurls = [
     {
@@ -290,11 +291,13 @@ const fetchData = async (keyword) => {
                 'Content-Type': 'application/json'
             },
         });
+        
+        hideLoadingPopup();
         const data = await response.json();
         return data;
     } catch (error) {
         console.error('Error:', error);
-        window.alert('Can not connect server');
+        showNotification('Failed to connect to server', 'error');
     }
 };
 
@@ -332,10 +335,10 @@ const generateTableRows = (items) => {
             </tr>`;
                 }
             })
-            })
-
         })
-    ;
+
+    })
+        ;
 
     return rows;
 };
@@ -343,14 +346,15 @@ const generateTableRows = (items) => {
 // Function to handle form submission
 const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+    
     const keyword = searchInput.value.trim();
     if (keyword.length > 0) {
+        showLoadingPopup();
         const data = await fetchData(keyword);
         if (data.items.length > 0) {
 
-        // Display the result
-        const tableHTML = `
+            // Display the result
+            const tableHTML = `
           <table>
             <thead>
               <tr>
@@ -366,12 +370,12 @@ const handleFormSubmit = async (event) => {
           </table>
         `;
 
-        resultDiv.innerHTML = tableHTML;
+            resultDiv.innerHTML = tableHTML;
         }
-        else window.alert('No data for this user')
+        else showNotification('No data for this user', 'error');
     }
     else {
-        window.alert("Enter mail")
+        showNotification('Enter your email', 'error');
     }
 };
 
@@ -387,6 +391,7 @@ resultDiv.addEventListener('click', (event) => {
 
     const { target } = event;
 
+
     if (target.tagName === 'A' && target.innerHTML !== 'na' && target.innerHTML !== null) {
         event.preventDefault();
 
@@ -394,10 +399,29 @@ resultDiv.addEventListener('click', (event) => {
         navigator.clipboard.writeText(courseUrl)
             .then(() => {
                 console.log('URL copied to clipboard');
-                window.alert('URL copied to clipboard successfully!');
+                showNotification('URL copied to clipboard!', 'success');
             })
             .catch((error) => {
-                console.error('Failed to copy URL:', error);
+                showNotification('Failed to copy URL! Please try again.', 'error');
             });
     }
 });
+
+function showNotification(message, type) {
+    const notification = document.createElement('div');
+    notification.textContent = message;
+    notification.classList.add('notification', `notification-${type}`, 'show');
+    form.appendChild(notification);
+
+    setTimeout(() => {
+        notification.classList.remove('show');
+    }, 2000);
+}
+
+function showLoadingPopup() {
+    loadingPopup.style.display = 'block';
+}
+
+function hideLoadingPopup() {
+    loadingPopup.style.display = 'none';
+}

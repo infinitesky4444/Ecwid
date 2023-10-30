@@ -329,6 +329,10 @@
   </style>
 
   <style>
+    form {
+      position: relative;
+    }
+
     table,
     td,
     th {
@@ -362,6 +366,49 @@
 
     .tooltip.show {
       opacity: 1;
+    }
+
+    .notification {
+      position: absolute;
+      z-index: 100;
+      top: 100px;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      opacity: 0;
+      transition: opacity 3s ease-in-out;
+    }
+
+    .notification.show {
+      opacity: 1;
+    }
+
+    .notification-success {
+      background-color: #4CAF50;
+      /* Green background color for success */
+    }
+
+    .notification-error {
+      background-color: #F44336;
+      /* Red background color for error */
+    }
+
+    #loadingPopup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      font-size: 48px;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.7);
+      padding: 20px;
+      border-radius: 5px;
+      color: #fff;
+    }
+
+    #loadingPopup span {
+      font-weight: bold;
     }
 
     @media (max-width: 900px) {
@@ -6290,12 +6337,15 @@
                             </label>
                             <form id="myForm"><input aria-invalid="false" aria-required="true" autocomplete="email"
                                 class="eTv7qUMqLR9lJxpIAC3F ALOSYVR_2QTYRdUXNe60" id="searchInput" placeholder=""
-                                type="email" value="" tabindex="0">
+                                type="email" value="" tabindex="0" style="padding: 15px;">
                               <button type="submit"
                                 class="button sqs-system-button sqs-editable-button sqs-button-element--primary FecjBqAV0ViY3ijU58R1"
-                                tabindex="0" style="margin-top: 20px;">Submit</button>
+                                tabindex="0" style="margin-top: 5px;">Submit</button>
                             </form>
-                            <div id="result" class="result" style="margin-top: 20px;"></div>
+                            <div id="loadingPopup">
+                              <span>Loading...</span>
+                            </div>
+                            <div id="result" class="result" style="margin-top: 100px;"></div>
 
                             <!-- <div class="content-wrapper" style="display: flex; flex-direction: column; align-items: center; width: 75%;">
                                 <h1>You can search your products</h1>
