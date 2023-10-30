@@ -84,7 +84,7 @@
     th {
       border: 1px solid #ddd;
       text-align: center;
-      font-size: 14px;
+      font-size: 20px;
     }
 
     table {
@@ -94,6 +94,7 @@
 
     th,
     td {
+      max-width: 100px;
       padding: 15px;
     }
 
@@ -6021,13 +6022,30 @@
                         <div id="form-submission-html-652b07b922722e58fa78a99c" class="sqs-form-block-submission-html"
                           data-submission-html=""></div>
                         <div class="form-wrapper">
-                          <div class="content-wrapper" style="display: flex; flex-direction: column; align-items: center;">
-                            <h1>Search your products</h1>
-                            <form id="myForm">
-                              <input type="text" id="searchInput" placeholder="Enter your mail" style="padding: 8px;">
-                              <input type="submit" value="Search">
-                            </form>
-                            <div id="result" class="result" style="margin-top: 10px;"></div>
+                          <div class="form-item field email required" id="email-yui_3_17_2_1_1697318796428_2142"
+                            data-dynamic-strings=""><label for="email-yui_3_17_2_1_1697318796428_2142-field"
+                              class="title ORJvfAX1j_0GYzxaesgd">
+                              <div class="V_yH0Ko5JiN5z1pCuJtb">
+                                <div class="xHXC4uuk1CR_E981Erer"><span>Email</span><span
+                                    class="description required">(required)</span></div>
+                              </div>
+                            </label><form id="myForm"><input aria-invalid="false" aria-required="true" autocomplete="email"
+                              class="eTv7qUMqLR9lJxpIAC3F ALOSYVR_2QTYRdUXNe60"
+                              id="searchInput" placeholder="" type="email" value=""
+                              tabindex="0">
+                              <button type="submit" class="button sqs-system-button sqs-editable-button sqs-button-element--primary FecjBqAV0ViY3ijU58R1" tabindex="0" style="margin-top: 20px;">Submit</button></form>
+                              <div id="result" class="result"></div>
+
+                              <!-- <div class="content-wrapper" style="display: flex; flex-direction: column; align-items: center; width: 75%;">
+                                <h1>You can search your products</h1>
+                                <form id="myForm">
+                                  <input type="text" id="searchInput" placeholder="Enter your mail">
+                                  <input type="submit" value="Search">
+                                </form>
+                                <div id="result" class="result"></div>
+                              </div> -->
+
+
                           </div>
                         </div>
                       </div>
