@@ -291,7 +291,7 @@ const fetchData = async (keyword) => {
                 'Content-Type': 'application/json'
             },
         });
-        
+
         hideLoadingPopup();
         const data = await response.json();
         return data;
@@ -346,7 +346,7 @@ const generateTableRows = (items) => {
 // Function to handle form submission
 const handleFormSubmit = async (event) => {
     event.preventDefault();
-    
+
     const keyword = searchInput.value.trim();
     if (keyword.length > 0) {
         showLoadingPopup();
@@ -424,4 +424,60 @@ function showLoadingPopup() {
 
 function hideLoadingPopup() {
     loadingPopup.style.display = 'none';
+}
+
+function searchEmail() {
+    var codeWrapper = document.getElementById('search-product');
+    var msgbox = document.getElementById('Message-box');
+    var lost_email = document.getElementById('lost-email');
+    var open_error = document.getElementById('open-error');
+    var report_error = document.getElementById('report-error');
+    var question = document.getElementById('question');
+    var other = document.getElementById('Other');
+
+    if (lost_email.checked || open_error.checked) {
+        codeWrapper.style.display = 'block';
+        msgbox.style.display = 'none';
+    } else {
+        if (report_error.checked || question.checked || other.checked) {
+            codeWrapper.style.display = 'none';
+            msgbox.style.display = 'block';
+        } else {
+            msgbox.style.display = 'none';
+            codeWrapper.style.display = 'block';
+        }
+    }
+}
+
+function sendMessage() {
+    var msg = document.getElementById('textarea-yui_3_17_2_1_1697318796428_2144-field').value;
+    var senderemail = document.getElementById('senderEmail').value
+    var recipientEmail = "sgtgeorgegodoy@gmail.com"
+    var msgsend = document.getElementById('Message-box');
+    const notification = document.createElement('div');
+    notification.textContent = 'Thank you. Sgt. Godoy has been contacted.'
+
+    var sendMessage = 'mailto:' + encodeURIComponent(recipientEmail) + "&body=" + encodeURIComponent(msg);
+
+    window.open(sendMessage);
+
+    if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+        // If browser supports notifications and permission is granted
+        msgsend.appendChild(notification)
+        setTimeout(() => {
+            notification.style.display = 'block';
+            location.reload();
+        }, 2000);
+      } else if (typeof Notification !== "undefined" && Notification.permission !== "denied") {
+        // If browser supports notifications but permission is not granted or denied
+        Notification.requestPermission(function (permission) {
+          if (permission === "granted") {
+            msgsend.appendChild(notification)
+            setTimeout(() => {
+                notification.style.display = 'block';
+                location.reload();
+            }, 2000);
+          }
+        });
+      }
 }
